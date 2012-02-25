@@ -1,11 +1,13 @@
 #|
   This file is a part of circular-streams project.
+  Copyright (c) 2011-2012 Tomohiro Matsuyama (tomo@cx4a.org)
   Copyright (c) 2012 Eitarow Fukamachi (e.arrows@gmail.com)
 |#
 
 #|
   Circulus streams for Common Lisp.
 
+  Original Author: Tomohiro Matsuyama (tomo@cx4a.org)
   Author: Eitarow Fukamachi (e.arrows@gmail.com)
 |#
 
@@ -16,6 +18,7 @@
 
 (defsystem circular-streams
   :version "0.1-SNAPSHOT"
+  :author "Tomohiro Matsuyama"
   :author "Eitarow Fukamachi"
   :license "LLGPL"
   :depends-on (:cl-annot
