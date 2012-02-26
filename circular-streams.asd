@@ -5,7 +5,7 @@
 |#
 
 #|
-  Circulus streams for Common Lisp.
+  Circularly readable streams for Common Lisp.
 
   Original Author: Tomohiro Matsuyama (tomo@cx4a.org)
   Author: Eitarow Fukamachi (e.arrows@gmail.com)
@@ -27,7 +27,7 @@
   :components ((:module "src"
                 :components
                 ((:file "circular-streams"))))
-  :description "Circulus streams for Common Lisp"
+  :description "Circularly readable streams for Common Lisp"
   :long-description
   #.(with-open-file (stream (merge-pathnames
                              #p"README.markdown"

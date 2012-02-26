@@ -1,4 +1,4 @@
-# Circular-Streams - Circulus streams for Common Lisp.
+# Circular-Streams - Circularly readable streams for Common Lisp
 
 ## Usage
 
