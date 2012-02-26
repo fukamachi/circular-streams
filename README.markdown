@@ -25,6 +25,8 @@
 
 Circular-Streams allows you to read streams circularly by wrapping real streams. Once you reach end-of-file of a stream, it's file position will be reset to 0 and you're able to read it again.
 
+Note this library can treat only octet streams which has a method `read-byte`. This might be expanded in the future.
+
 This library was originally written by Tomohiro Matsuyama as a part of [Clack](http://clacklisp.org), Eitarow Fukamachi ported it with some improvements.
 
 ## API Reference
