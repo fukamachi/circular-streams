@@ -57,7 +57,7 @@
            (incf position))
          (prog1
            :eof
-           (setf (circular-stream-position this) 0)))))
+           (setf position 0)))))
 
 (defmethod stream-read-char ((this circular-stream))
   (let ((byte (stream-read-byte this)))

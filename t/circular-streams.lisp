@@ -12,7 +12,7 @@
         :cl-test-more))
 (in-package :circular-streams-test)
 
-(plan 10)
+(plan 9)
 
 (defparameter *stream*
               (flex:make-in-memory-input-stream
@@ -30,14 +30,12 @@
 (is (read-char *circular-stream* nil :eof) :eof)
 (is (read-char *circular-stream*) #\H)
 
-(let ((buf (make-array 4 :adjustable t :fill-pointer 4)))
+(let ((buf (make-array 5 :adjustable t :fill-pointer 5 :initial-element nil)))
   (read-sequence buf *circular-stream*)
-  (ok (equalp buf (flex:string-to-octets "ello"))))
-
-(is (read-char *circular-stream* nil :eof) :eof)
+  (is buf #(101 108 108 111 nil) :test #'equalp))
 
 (let ((buf (make-array 5 :adjustable t :fill-pointer 5)))
   (read-sequence buf *circular-stream*)
-  (ok (equalp buf (flex:string-to-octets "Hello"))))
+  (is buf (flex:string-to-octets "Hello") :test #'equalp))
 
 (finalize)
