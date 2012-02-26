@@ -8,8 +8,10 @@
 (defpackage circular-streams-test
   (:use :cl
         :circular-streams
-        :trivial-gray-streams
-        :cl-test-more))
+        :cl-test-more)
+  (:import-from :flexi-streams
+                :make-in-memory-input-stream
+                :string-to-octets))
 (in-package :circular-streams-test)
 
 (plan 9)
@@ -19,8 +21,7 @@
                (flex:string-to-octets "Hello")))
 
 (defparameter *circular-stream*
-              (make-instance 'circular-stream
-                 :stream *stream*))
+              (make-circular-input-stream *stream*))
 
 (is (read-char *circular-stream*) #\H)
 (is (read-char *circular-stream*) #\e)

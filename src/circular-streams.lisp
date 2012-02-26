@@ -13,30 +13,35 @@
 (cl-syntax:use-syntax :annot)
 
 @export
-(defun make-buffer ()
+(defun make-circular-stream-buffer ()
   (make-array 0
               :element-type 'octet
               :adjustable t
               :fill-pointer 0))
 
 @export
-(defclass circular-stream (trivial-gray-stream-mixin
-                           fundamental-binary-input-stream)
+(defclass circular-input-stream (trivial-gray-stream-mixin
+                                 fundamental-binary-input-stream)
      ((stream :initarg :stream
               :reader circular-stream-stream)
       (buffer :initarg :buffer
-              :initform (make-buffer)
+              :initform (make-circular-stream-buffer)
               :reader circular-stream-buffer)
       (position :initform 0
                 :accessor circular-stream-position)))
 
+@export
+(defun make-circular-input-stream (stream &key (buffer (make-circular-stream-buffer)))
+  (make-instance 'circular-input-stream
+     :stream stream
+     :buffer buffer))
+
 (deftype octet () '(unsigned-byte 8))
 
-(defmethod stream-element-type ((this circular-stream))
+(defmethod stream-element-type ((this circular-input-stream))
   'octet)
 
-@export
-(defmethod circular-stream-fetch ((this circular-stream))
+(defmethod circular-stream-fetch ((this circular-input-stream))
   (with-slots (stream buffer position) this
      (let ((to-be-fetched (1+ (- position (length buffer)))))
        ;; TODO use read-sequence
@@ -48,7 +53,7 @@
                return fetched
              finally (return fetched)))))
 
-(defmethod stream-read-byte ((this circular-stream))
+(defmethod stream-read-byte ((this circular-input-stream))
   (with-slots (stream buffer position) this
      (if (or (< position (length buffer))
              (plusp (circular-stream-fetch this)))
@@ -59,13 +64,13 @@
            :eof
            (setf position 0)))))
 
-(defmethod stream-read-char ((this circular-stream))
+(defmethod stream-read-char ((this circular-input-stream))
   (let ((byte (stream-read-byte this)))
     (if (eq byte :eof)
         byte
         (code-char byte))))
 
-(defmethod stream-read-line ((this circular-stream))
+(defmethod stream-read-line ((this circular-input-stream))
   (loop with buf = (make-string-output-stream :element-type 'character)
         for c = (read-char this nil :eof)
         if (eq c :eof)
@@ -75,19 +80,19 @@
         else
           do (write-char c buf)))
 
-(defmethod stream-listen ((this circular-stream))
+(defmethod stream-listen ((this circular-input-stream))
   (with-slots (buffer position) this
      (< position (length buffer))))
 
-(defmethod stream-read-sequence ((this circular-stream) sequence start end &key)
+(defmethod stream-read-sequence ((this circular-input-stream) sequence start end &key)
   (loop for index from start below end
         for octet = (stream-read-byte this)
         while (typep octet 'octet)
         do (setf (elt sequence index) octet)
         finally (return index)))
 
-(defmethod stream-file-position ((this circular-stream))
+(defmethod stream-file-position ((this circular-input-stream))
   (circular-stream-position this))
 
-(defmethod (setf stream-file-position) (position-spec (this circular-stream))
+(defmethod (setf stream-file-position) (position-spec (this circular-input-stream))
   (setf (circular-stream-position this) position-spec))
