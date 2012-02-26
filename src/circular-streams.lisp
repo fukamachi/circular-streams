@@ -65,6 +65,16 @@
         byte
         (code-char byte))))
 
+(defmethod stream-read-line ((this circular-stream))
+  (loop with buf = (make-string-output-stream :element-type 'character)
+        for c = (read-char this nil :eof)
+        if (eq c :eof)
+          return (values (get-output-stream-string buf) t)
+        else if (char= c #\Newline)
+          return (values (get-output-stream-string buf) nil)
+        else
+          do (write-char c buf)))
+
 (defmethod stream-listen ((this circular-stream))
   (with-slots (buffer position) this
      (< position (length buffer))))
