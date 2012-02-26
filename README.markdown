@@ -27,6 +27,20 @@ Circular-Streams allows you to read streams circularly by wrapping real streams.
 
 This library was originally written by Tomohiro Matsuyama as a part of [Clack](http://clacklisp.org), Eitarow Fukamachi ported it with some improvements.
 
+## API Reference
+
+### [Class] circular-input-stream
+
+Class for circular input streams. `make-circular-input-stream` is available to create an instance.
+
+### [Function] make-circular-input-stream
+
+Creates `circular-input-stream` and returns it. If `:buffer` is specified, the instance uses it as an internal buffer. You need this to reuse `circular-input-stream` without saving itself.
+
+### [Function] make-circular-stream-buffer
+
+Creates a buffer array for `circular-input-stream`.
+
 ## Author
 
 * Tomohiro Matsuyama (tomo@cx4a.org)

@@ -14,6 +14,7 @@
 
 @export
 (defun make-circular-stream-buffer ()
+  "Creates a buffer array for `circular-input-stream'."
   (make-array 0
               :element-type 'octet
               :adjustable t
@@ -28,10 +29,12 @@
               :initform (make-circular-stream-buffer)
               :reader circular-stream-buffer)
       (position :initform 0
-                :accessor circular-stream-position)))
+                :accessor circular-stream-position))
+  (:documentation "Class for circular input streams. `make-circular-input-stream' is available to create an instance."))
 
 @export
 (defun make-circular-input-stream (stream &key (buffer (make-circular-stream-buffer)))
+  "Creates `circular-input-stream' and returns it. If `:buffer' is specified, the instance uses it as an internal buffer. You need this to reuse `circular-input-stream' without saving itself."
   (make-instance 'circular-input-stream
      :stream stream
      :buffer buffer))
