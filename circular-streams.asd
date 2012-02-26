@@ -17,7 +17,7 @@
 (in-package :circular-streams-asd)
 
 (defsystem circular-streams
-  :version "0.1-SNAPSHOT"
+  :version "0.1"
   :author "Tomohiro Matsuyama"
   :author "Eitarow Fukamachi"
   :license "LLGPL"
