@@ -7,7 +7,10 @@
 (in-package :cl-user)
 (defpackage circular-streams
   (:use :cl
-        :trivial-gray-streams))
+        :trivial-gray-streams)
+  (:export :circular-stream-stream
+           :circular-stream-buffer
+           :circular-stream-position))
 (in-package :circular-streams)
 
 (cl-syntax:use-syntax :annot)
