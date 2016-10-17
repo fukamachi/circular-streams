@@ -7,7 +7,7 @@
                    #(72 101 108 108 111)))
     
     (defparameter *circular-stream*
-                  (make-circular-input-stream *stream*))
+                  (make-circular-stream *stream*))
     
     (read-char *circular-stream*)          ;=> #\H
     (read-char *circular-stream*)          ;=> #\e
