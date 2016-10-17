@@ -1,0 +1,23 @@
+language: common-lisp
+sudo: required
+
+env:
+  global:
+    - PATH=~/.roswell/bin:$PATH
+    - ROSWELL_BRANCH=release
+    - ROSWELL_INSTALL_DIR=$HOME/.roswell
+    - COVERAGE_EXCLUDE=t
+  matrix:
+    - LISP=sbcl-bin COVERALLS=true
+    - LISP=ccl-bin
+    - LISP=abcl
+    - LISP=ecl
+    - LISP=clisp
+
+install:
+  # Install Roswell
+  - curl -L https://raw.githubusercontent.com/roswell/roswell/$ROSWELL_BRANCH/scripts/install-for-ci.sh | sh
+  - ros install prove
+
+script:
+  - run-prove circular-streams-test.asd

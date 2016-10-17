@@ -1,5 +1,7 @@
 # Circular-Streams - Circularly readable streams for Common Lisp
 
+[![Build Status](https://travis-ci.org/fukamachi/circular-streams.svg?branch=master)](https://travis-ci.org/fukamachi/circular-streams)
+
 ## Usage
 
     (defparameter *stream*
