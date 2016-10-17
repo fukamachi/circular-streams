@@ -99,6 +99,3 @@
 
 (defmethod stream-file-position ((this circular-input-stream))
   (circular-stream-position this))
-
-(defmethod (setf stream-file-position) (position-spec (this circular-input-stream))
-  (setf (circular-stream-position this) position-spec))
