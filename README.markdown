@@ -27,7 +27,7 @@ Circular-Streams allows you to read streams circularly by wrapping real streams.
 
 Note this library can treat only octet streams which has a method `read-byte`. This might be expanded in the future.
 
-This library was originally written by Tomohiro Matsuyama as a part of [Clack](http://clacklisp.org), Eitarow Fukamachi ported it with some improvements.
+This library was originally written by Tomohiro Matsuyama as a part of [Clack](http://clacklisp.org), Eitaro Fukamachi ported it with some improvements.
 
 ## API Reference
 
@@ -46,12 +46,12 @@ Creates a buffer array for `circular-input-stream`.
 ## Author
 
 * Tomohiro Matsuyama (tomo@cx4a.org)
-* Eitarow Fukamachi (e.arrows@gmail.com)
+* Eitaro Fukamachi (e.arrows@gmail.com)
 
 ## Copyright
 
 Copyright (c) 2011-2012 Tomohiro Matsuyama (tomo@cx4a.org)  
-Copyright (c) 2012 Eitarow Fukamachi (e.arrows@gmail.com)
+Copyright (c) 2012-2016 Eitaro Fukamachi (e.arrows@gmail.com)
 
 # License
 
