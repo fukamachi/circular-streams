@@ -2,14 +2,14 @@
 (defpackage circular-streams
   (:use :cl
         :trivial-gray-streams)
-  (:export :circular-stream-stream
+  (:export :make-circular-stream-buffer
+           :circular-input-stream
+           :make-circular-input-stream
+           :circular-stream-stream
            :circular-stream-buffer
            :circular-stream-position))
 (in-package :circular-streams)
 
-(cl-syntax:use-syntax :annot)
-
-@export
 (defun make-circular-stream-buffer ()
   "Creates a buffer array for `circular-input-stream'."
   (make-array 0
@@ -17,7 +17,6 @@
               :adjustable t
               :fill-pointer 0))
 
-@export
 (defclass circular-input-stream (trivial-gray-stream-mixin
                                  fundamental-binary-input-stream)
      ((stream :initarg :stream
@@ -29,7 +28,6 @@
                 :accessor circular-stream-position))
   (:documentation "Class for circular input streams. `make-circular-input-stream' is available to create an instance."))
 
-@export
 (defun make-circular-input-stream (stream &key (buffer (make-circular-stream-buffer)))
   "Creates `circular-input-stream' and returns it. If `:buffer' is specified, the instance uses it as an internal buffer. You need this to reuse `circular-input-stream' without saving itself."
   (make-instance 'circular-input-stream

@@ -15,9 +15,7 @@
   :author "Tomohiro Matsuyama"
   :author "Eitaro Fukamachi"
   :license "LLGPL"
-  :depends-on (:cl-annot
-               :cl-syntax-annot
-               :trivial-gray-streams)
+  :depends-on (:trivial-gray-streams)
   :components ((:module "src"
                 :components
                 ((:file "circular-streams"))))
