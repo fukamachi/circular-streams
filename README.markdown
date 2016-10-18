@@ -1,6 +1,7 @@
 # Circular-Streams - Circularly readable streams for Common Lisp
 
 [![Build Status](https://travis-ci.org/fukamachi/circular-streams.svg?branch=master)](https://travis-ci.org/fukamachi/circular-streams)
+[![Coverage Status](https://coveralls.io/repos/github/fukamachi/circular-streams/badge.svg?branch=master)](https://coveralls.io/github/fukamachi/circular-streams?branch=master)
 
 ## Usage
 
@@ -37,13 +38,9 @@ This library was originally written by Tomohiro Matsuyama as a part of [Clack](h
 
 Class for circular input streams. `make-circular-input-stream` is available to create an instance.
 
-### [Function] make-circular-input-stream
+### [Function] make-circular-stream
 
-Creates `circular-input-stream` and returns it. If `:buffer` is specified, the instance uses it as an internal buffer. You need this to reuse `circular-input-stream` without saving itself.
-
-### [Function] make-circular-stream-buffer
-
-Creates a buffer array for `circular-input-stream`.
+Creates `circular-input-stream` and returns it.
 
 ## Author
 
