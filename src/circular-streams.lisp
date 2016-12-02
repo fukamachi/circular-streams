@@ -109,9 +109,13 @@
                  :start1 start
                  :end1 end
                  :start2 position)
-        (let ((expected-end (+ start (- (length octets) position))))
-          (if (< end expected-end)
-              end
+        (let ((expected-end (- (min (+ (- end start) position)
+                                    (length octets))
+                               position)))
+          (if (<= end expected-end)
+              (progn
+                (incf position expected-end)
+                end)
               (progn
                 (setf position 0)
                 expected-end)))))))

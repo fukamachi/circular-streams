@@ -8,11 +8,11 @@
                 :string-to-octets))
 (in-package :circular-streams-test)
 
-(plan 9)
+(plan 15)
 
 (defparameter *stream*
-              (flex:make-in-memory-input-stream
-               (flex:string-to-octets "Hello")))
+  (flex:make-in-memory-input-stream
+   (flex:string-to-octets "Hello")))
 
 (defparameter *circular-stream*
               (make-circular-input-stream *stream*))
@@ -32,5 +32,14 @@
 (let ((buf (make-array 5 :adjustable t :fill-pointer 5)))
   (read-sequence buf *circular-stream*)
   (is buf (flex:string-to-octets "Hello") :test #'equalp))
+
+(file-position *circular-stream* 0)
+(let ((buf (make-array 2 :element-type '(unsigned-byte 8))))
+  (is (read-sequence buf *circular-stream*) 2)
+  (is (flex:octets-to-string buf) "He" :test #'equalp)
+  (is (read-sequence buf *circular-stream*) 2)
+  (is (flex:octets-to-string buf) "ll" :test #'equalp)
+  (is (read-sequence buf *circular-stream*) 1)
+  (is (flex:octets-to-string buf :end 1) "o" :test #'equalp))
 
 (finalize)
